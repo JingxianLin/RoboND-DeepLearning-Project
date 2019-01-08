@@ -68,10 +68,17 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 ```
 
 ![alt text][image2]
-#### 3. Parameters
+#### 3. Hyperparameters
+```python
+learning_rate = 0.01
+batch_size = 16
+num_epochs = 50
+steps_per_epoch = 4131 / batch_size
+validation_steps = 100
+workers = 2
+```
 
-
-
+And this is the hardest part of this project.  
 #### 4. Techniques
 
 
