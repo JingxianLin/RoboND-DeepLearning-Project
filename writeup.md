@@ -53,7 +53,7 @@ def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
     return output_layer
 ```
 
-Decoder is comprised of three parts: A bilinear upsampling layer, a layer contatenation step, and a separable convolution layer:
+Decoder is comprised of three parts: A bilinear upsampling layer, a layer concatenation step, and a separable convolution layer:
 
 ```python
 def decoder_block(small_ip_layer, large_ip_layer, filters):
