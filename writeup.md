@@ -42,6 +42,31 @@ def encoder_block(input_layer, filters, strides):
     return output_layer
 ```
 
+1x1 convolution layer is a regular convolution, its code followed:
+
+```python
+def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
+    output_layer = layers.Conv2D(filters=filters, kernel_size=kernel_size, strides=strides, 
+                      padding='same', activation='relu')(input_layer)
+    
+    output_layer = layers.BatchNormalization()(output_layer) 
+    return output_layer
+```
+
+Decoder is comprised of three parts: A bilinear upsampling layer, a layer contatenation step, and a separable convolution layer:
+
+```python
+def decoder_block(small_ip_layer, large_ip_layer, filters):
+    
+    # TODO Upsample the small input layer using the bilinear_upsample() function.
+    small_ip_layer_upsampled = bilinear_upsample(small_ip_layer)
+    # TODO Concatenate the upsampled and large input layers using layers.concatenate
+    output_layer = layers.concatenate([small_ip_layer_upsampled, large_ip_layer])
+    # TODO Add some number of separable convolution layers
+    output_layer = separable_conv2d_batchnorm(input_layer = output_layer, filters = filters)
+    return output_layer
+```
+
 ![alt text][image2]
 #### 3. Parameters
 
