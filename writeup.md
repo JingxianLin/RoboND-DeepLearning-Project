@@ -7,7 +7,7 @@
 [//]: # (Image References)
 
 [image1]: ./figures/searched.png
-[image2]: ./figures/collected.png
+[image2]: ./docs/misc/fcn.png
 [image3]: ./figures/threshed.png 
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
@@ -21,7 +21,7 @@
 You're reading it!
 
 #### 2. Architecture
-In .
+The final project is based on the Semantic Segmentation lab and trying to build a deep learning model that will allow a simulated quadcoper to follow around a particular human target it detects.  In order to fulfill this task, a Fully Convolutional Network (FCN) is trained to label each pixel in the output image as one of environment, person, and hero, so the drone can follow the hero closely and accurately.  FCN 
 
 ![alt text][image2]
 #### 3. Parameters
