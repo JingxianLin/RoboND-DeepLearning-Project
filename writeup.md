@@ -131,13 +131,13 @@ Here are some results after testing the trained model.  Image on the left is the
 
 While the quad is on patrol and the target is not visible, average IoU for other people is 0.729, examples here:
 
-![alt_text][image5]
-![alt_text][image6]
+![alt_text][image7]
+![alt_text][image8]
 
 While the target is far away, average IoU for the hero is 0.229, not so good, these hard cases as follows:
 
-![alt_text][image7]
-![alt_text][image8]
+![alt_text][image5]
+![alt_text][image6]
 
 
 
