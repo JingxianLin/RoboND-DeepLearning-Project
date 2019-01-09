@@ -124,6 +124,21 @@ workers = 2
 And this is the hardest part of this project.  For learning rate, 0.1 is too large, making poor performance; 0.01 brings down the loss, and achieves an accuracy greater than 0.4.  Batch size of 16 is good for memory and training speed.  Number of epochs is set to 50, because of low training and validation loss; fewer epochs tend to underfit the model with high training and validation loss; more epochs are prone to overfitting with low training loss and high validation loss.  Steps per epoch is based on the total number of images in training dataset divided by the batch_size.  For validation steps and workers, recommended values are used.
 #### 4. Model Results
 
-Here are some results after testing the trained model.  Image on the left is the raw one, the middle is the ground truth, and the right is model output.  When following the target at close range, .
+Here are some results after testing the trained model.  Image on the left is the raw one, the middle is the ground truth, and the right is model output.  While the quad is following behind the target, average IoU for the hero is 0.901, pretty high, shown below.
+
+![alt_text][image3]
+![alt_text][image4]
+
+While the quad is on patrol and the target is not visible, average IoU for other people is 0.729, examples here:
+
+![alt_text][image5]
+![alt_text][image6]
+
+While the target is far away, average IoU for the hero is 0.229, not so good, these hard cases as follows:
+
+![alt_text][image7]
+![alt_text][image8]
+
+
 
 #### 5. Future Enhancements
