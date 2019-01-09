@@ -6,7 +6,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./figures/searched.png
+[image1]: ./docs/misc/model.png
 [image2]: ./docs/misc/fcn.png
 [image3]: ./figures/threshed.png 
 
@@ -68,7 +68,51 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 ```
 
 ![alt text][image2]
-#### 3. Hyperparameters
+#### 2. Model Built
+Final model is 7 layers deep, with 3 encoder blocks, 1x1 convolution layer, and 3 decoder blocks:
+
+```python
+def fcn_model(inputs, num_classes):
+    
+    # TODO Add Encoder Blocks. 
+    # Remember that with each encoder layer, the depth of your model (the number of filters) increases.
+    conv1 = encoder_block(input_layer = inputs, filters = 32, strides = 2)
+    print("conv1: ", conv1.shape)
+    conv2 = encoder_block(input_layer = conv1, filters = 64, strides = 2)
+    print("conv2: ", conv2.shape)
+    conv3 = encoder_block(input_layer = conv2, filters = 128, strides = 2)
+    print("conv3: ", conv3.shape)
+    # TODO Add 1x1 Convolution layer using conv2d_batchnorm().
+    conv_norm = conv2d_batchnorm(input_layer = conv3, filters = 128, kernel_size = 1, strides = 1)
+    print("conv_norm: ", conv_norm.shape)
+    # TODO: Add the same number of Decoder Blocks as the number of Encoder Blocks
+    deconv1 = decoder_block(small_ip_layer = conv_norm, large_ip_layer = conv2, filters = 64)
+    print("deconv1: ", deconv1.shape)
+    deconv2 = decoder_block(small_ip_layer = deconv1, large_ip_layer = conv1, filters = 32)
+    print("deconv2: ", deconv2.shape)
+    deconv3 = decoder_block(small_ip_layer = deconv2, large_ip_layer = inputs, filters = num_classes)
+    print("deconv3: ", deconv3.shape)
+    # The function returns the output layer of your model. "x" is the final layer obtained from the last decoder_block()
+    output_layer = layers.Conv2D(num_classes, 1, activation='softmax', padding='same')(deconv3)
+    print("output_layer: ", output_layer.shape)
+    return output_layer
+
+conv1:  (?, 80, 80, 32)
+conv2:  (?, 40, 40, 64)
+conv3:  (?, 20, 20, 128)
+conv_norm:  (?, 20, 20, 128)
+deconv1:  (?, 40, 40, 64)
+deconv2:  (?, 80, 80, 32)
+deconv3:  (?, 160, 160, 3)
+output_layer:  (?, 160, 160, 3)
+```
+
+![alt_text][image1]
+#### 3. Extra Techniques
+
+
+
+#### 5. Hyperparameters
 ```python
 learning_rate = 0.01
 batch_size = 16
@@ -79,17 +123,6 @@ workers = 2
 ```
 
 And this is the hardest part of this project.  For learning rate, 0.1 is too large, making poor performance; 0.01 brings down the loss, and achieves an accuracy greater than 0.4.  Batch size of 16 is good for memory and training speed.  Number of epochs is set to 50, because of low training and validation loss; fewer epochs tend to underfit the model with high training and validation loss; more epochs are prone to overfitting with low training loss and high validation loss.  Steps per epoch is based on the total number of images in training dataset divided by the batch_size.  For validation steps and workers, recommended values are used.
-#### 4. Techniques
-
-
-
-#### 5. Image Manipulation
-
-
-
-#### 6. Challenges
-
-
 
 ### Model
 
