@@ -8,7 +8,12 @@
 
 [image1]: ./docs/misc/model.png
 [image2]: ./docs/misc/fcn.png
-[image3]: ./figures/threshed.png 
+[image3]: ./docs/misc/following1.png
+[image4]: ./docs/misc/following2.png
+[image5]: ./docs/misc/far1.png
+[image6]: ./docs/misc/far2.png
+[image7]: ./docs/misc/non1.png
+[image8]: ./docs/misc/non2.png
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/916/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
