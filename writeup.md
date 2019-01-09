@@ -160,6 +160,7 @@ print(final_score)
 0.417966542871
 ```
 
-This model and data would not work well 
+This model and data would not work well for following another object, because only environment, person, and hero labels are in the training data.  In order to make it work for other object, data with desired label should be added.
 
 #### 5. Future Enhancements
+To improve final score, additional training and validation data should be collected and prepocessed.  With bigger dataset, more complex architecture can be tried to get better performance.
