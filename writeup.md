@@ -110,7 +110,7 @@ deconv3:  (?, 160, 160, 3)
 output_layer:  (?, 160, 160, 3)
 ```
 
-![alt_text][image2]
+![alt_text][image1]
 #### 3. Hyperparameters
 ```python
 learning_rate = 0.01
