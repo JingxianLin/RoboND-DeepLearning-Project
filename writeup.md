@@ -139,6 +139,27 @@ While the target is far away, average IoU for the hero is 0.229, not so good, th
 ![alt_text][image5]
 ![alt_text][image6]
 
+Trained model weights are saved in the correct format and run without errors, and several different scores to evaluate the model are included:
 
+```python
+# Sum all the true positives, etc from the three datasets to get a weight for the score
+true_pos = true_pos1 + true_pos2 + true_pos3
+false_pos = false_pos1 + false_pos2 + false_pos3
+false_neg = false_neg1 + false_neg2 + false_neg3
+
+weight = true_pos/(true_pos+false_neg+false_pos)
+print(weight)
+0.7396514161220044
+# The IoU for the dataset that never includes the hero is excluded from grading
+final_IoU = (iou1 + iou3)/2
+print(final_IoU)
+0.565085841466
+# And the final grade score is 
+final_score = final_IoU * weight
+print(final_score)
+0.417966542871
+```
+
+This model and data would not work well 
 
 #### 5. Future Enhancements
