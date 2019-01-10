@@ -78,7 +78,9 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 
 The decoding structure is in charge of taking the smaller volume representation and generating an output image that solves the task at hand, that is, the pixel-wise classification of the input image in an output volume.  This can be achieved through using transposed convolutions or bilinear upsampling.
 
-Skip connections are a great way to retain some of the finer details from the previous layers when decoding the layers to the original size.  One simple technique to carry this out is cancatenating two layers, the upsampled layer and a layer with more spatial information than the upsampled one, which offers a bit of flexibility because the depth of the input layers match up.
+Skip connections are a great way to retain some of the finer details from the previous layers when decoding the layers to the original size.  One simple technique to carry this out is concatenating two layers, the upsampled layer and a layer with more spatial information than the upsampled one, which offers a bit of flexibility because the depth of the input layers need not match up, and better to add some number of separable convolution layers to extract some more spatial information from prior layers.
+
+FCN parts include an encoder and a decoder: Encoder 
 
 Final model is 7 layers deep, with 3 encoder blocks, 1x1 convolution layer, and 3 decoder blocks:
 
