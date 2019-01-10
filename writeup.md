@@ -80,7 +80,7 @@ The decoding structure is in charge of taking the smaller volume representation 
 
 Skip connections are a great way to retain some of the finer details from the previous layers when decoding the layers to the original size.  One simple technique to carry this out is concatenating two layers, the upsampled layer and a layer with more spatial information than the upsampled one, which offers a bit of flexibility because the depth of the input layers need not match up, and better to add some number of separable convolution layers to extract some more spatial information from prior layers.
 
-FCN parts include an encoder and a decoder: Encoder 
+FCN parts include an encoder and a decoder: Encoder tries to reduce the dimensionality of the input image, like generating an embedding; Decoder is in charge of taking this reduced representation and generating an image out of it.  Generally speaking, encoding means compressing with loss of information, the finer detail of the original image, but key features that help distinguish the hero from other people and environment are kept, just leaving out trees, roads, etc.  Decoder tries to reconstruct images back to the original size and label each pixel as environment, person, or hero; compared to the original, the decoded picture will look like one kind of mapping from the input image to the location and shape of the hero, other people and environment, represented in 3 colors.
 
 Final model is 7 layers deep, with 3 encoder blocks, 1x1 convolution layer, and 3 decoder blocks:
 
