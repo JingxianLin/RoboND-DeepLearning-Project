@@ -49,7 +49,7 @@ def encoder_block(input_layer, filters, strides):
 
 This encoding structure is in charge of reducing the original input volume to a smaller volume representation, which holds information describing the image, but losing most of the spatial information contained in the image, unsuitable for this project's purpose of locating the hero.
 
-1x1 convolution layer is a regular convolution, its code followed:
+1x1 convolutional layer is a regular convolution, its code followed:
 
 ```python
 def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
@@ -60,7 +60,7 @@ def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
     return output_layer
 ```
 
-
+1 by 1 convolutions are used instead of fully-connected layers.  By flattening a 4D tensor into a 2D tensor, a fully connected layer loses spatial information, because no information about the location of the pixels is preserved.  Using 1x1 convolutions can avoid that.  Furthermore, replacement of fully-connected layers with convolutional layers presents an added advantage that during inference, images of any size can be fed into the trained network, something impossible for a fully connected layer because the output size is fixed there.
 
 Decoder is comprised of three parts: A bilinear upsampling layer, a layer concatenation step, and a separable convolution layer:
 
@@ -75,6 +75,10 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     output_layer = separable_conv2d_batchnorm(input_layer = output_layer, filters = filters)
     return output_layer
 ```
+
+The decoding structure is in charge of taking the smaller volume representation and generating an output image that solves the task at hand, that is, the pixel-wise classification of the input image in an output volume.  This can be achieved through using transposed convolutions or bilinear upsampling.
+
+Skip connections are a great way to retain some of the finer details from the previous layers when decoding the layers to the original size.  One simple technique to carry this out is cancatenating two layers, the upsampled layer and a layer with more spatial information than the upsampled one, which offers a bit of flexibility because the depth of the input layers match up.
 
 Final model is 7 layers deep, with 3 encoder blocks, 1x1 convolution layer, and 3 decoder blocks:
 
