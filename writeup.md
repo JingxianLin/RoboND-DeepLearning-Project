@@ -47,6 +47,8 @@ def encoder_block(input_layer, filters, strides):
     return output_layer
 ```
 
+This encoding structure is in charge of reducing the original input volume to a smaller volume representation, which holds information describing the image, but losing most of the spatial information contained in the image, unsuitable for this project's purpose of locating the hero.
+
 1x1 convolution layer is a regular convolution, its code followed:
 
 ```python
@@ -57,6 +59,8 @@ def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
     output_layer = layers.BatchNormalization()(output_layer) 
     return output_layer
 ```
+
+
 
 Decoder is comprised of three parts: A bilinear upsampling layer, a layer concatenation step, and a separable convolution layer:
 
